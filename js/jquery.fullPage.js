@@ -6,84 +6,84 @@
  * Copyright (C) 2015 alvarotrigo.com - A project by Alvaro Trigo
  */
 (function(global, factory) {
-    'use strict';
-    if (typeof define === 'function' && define.amd) {
-        define(['jquery'], function($) {
-          return factory($, global, global.document, global.Math);
-        });
-    } else if (typeof exports === "object" && exports) {
-        module.exports = factory(require('jquery'), global, global.document, global.Math);
-    } else {
-        factory(jQuery, global, global.document, global.Math);
-    }
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], function($) {
+      return factory($, global, global.document, global.Math);
+    });
+  } else if (typeof exports === "object" && exports) {
+      module.exports = factory(require('jquery'), global, global.document, global.Math);
+  } else {
+    factory(jQuery, global, global.document, global.Math);
+  }
 })(typeof window !== 'undefined' ? window : this, function($, window, document, Math, undefined) {
     'use strict';
 
-    // keeping central set of classnames and selectors
-    var WRAPPER =               'fullpage-wrapper';
-    var WRAPPER_SEL =           '.' + WRAPPER;
+  // keeping central set of classnames and selectors
+  var WRAPPER =               'fullpage-wrapper';
+  var WRAPPER_SEL =           '.' + WRAPPER;
 
-    // slimscroll
-    var SCROLLABLE =            'fp-scrollable';
-    var SCROLLABLE_SEL =        '.' + SCROLLABLE;
+  // slimscroll
+  var SCROLLABLE =            'fp-scrollable';
+  var SCROLLABLE_SEL =        '.' + SCROLLABLE;
 
-    // util
-    var RESPONSIVE =            'fp-responsive';
-    var NO_TRANSITION =         'fp-notransition';
-    var DESTROYED =             'fp-destroyed';
-    var ENABLED =               'fp-enabled';
-    var VIEWING_PREFIX =        'fp-viewing';
-    var ACTIVE =                'active';
-    var ACTIVE_SEL =            '.' + ACTIVE;
-    var COMPLETELY =            'fp-completely';
-    var COMPLETELY_SEL =        '.' + COMPLETELY;
+  // util
+  var RESPONSIVE =            'fp-responsive';
+  var NO_TRANSITION =         'fp-notransition';
+  var DESTROYED =             'fp-destroyed';
+  var ENABLED =               'fp-enabled';
+  var VIEWING_PREFIX =        'fp-viewing';
+  var ACTIVE =                'active';
+  var ACTIVE_SEL =            '.' + ACTIVE;
+  var COMPLETELY =            'fp-completely';
+  var COMPLETELY_SEL =        '.' + COMPLETELY;
 
-    // section
-    var SECTION_DEFAULT_SEL =   '.section';
-    var SECTION =               'fp-section';
-    var SECTION_SEL =           '.' + SECTION;
-    var SECTION_ACTIVE_SEL =    SECTION_SEL + ACTIVE_SEL;
-    var SECTION_FIRST_SEL =     SECTION_SEL + ':first';
-    var SECTION_LAST_SEL =      SECTION_SEL + ':last';
-    var TABLE_CELL =            'fp-tableCell';
-    var TABLE_CELL_SEL =        '.' + TABLE_CELL;
-    var AUTO_HEIGHT =           'fp-auto-height';
-    var AUTO_HEIGHT_SEL =       '.fp-auto-height';
-    var NORMAL_SCROLL =         'fp-normal-scroll';
-    var NORMAL_SCROLL_SEL =     '.fp-normal-scroll';
+  // section
+  var SECTION_DEFAULT_SEL =   '.section';
+  var SECTION =               'fp-section';
+  var SECTION_SEL =           '.' + SECTION;
+  var SECTION_ACTIVE_SEL =    SECTION_SEL + ACTIVE_SEL;
+  var SECTION_FIRST_SEL =     SECTION_SEL + ':first';
+  var SECTION_LAST_SEL =      SECTION_SEL + ':last';
+  var TABLE_CELL =            'fp-tableCell';
+  var TABLE_CELL_SEL =        '.' + TABLE_CELL;
+  var AUTO_HEIGHT =           'fp-auto-height';
+  var AUTO_HEIGHT_SEL =       '.fp-auto-height';
+  var NORMAL_SCROLL =         'fp-normal-scroll';
+  var NORMAL_SCROLL_SEL =     '.fp-normal-scroll';
 
-    // section nav
-    var SECTION_NAV =           'fp-nav';
-    var SECTION_NAV_SEL =       '#' + SECTION_NAV;
-    var SECTION_NAV_TOOLTIP =   'fp-tooltip';
-    var SECTION_NAV_TOOLTIP_SEL='.'+SECTION_NAV_TOOLTIP;
-    var SHOW_ACTIVE_TOOLTIP =   'fp-show-active';
+  // section nav
+  var SECTION_NAV =           'fp-nav';
+  var SECTION_NAV_SEL =       '#' + SECTION_NAV;
+  var SECTION_NAV_TOOLTIP =   'fp-tooltip';
+  var SECTION_NAV_TOOLTIP_SEL='.'+SECTION_NAV_TOOLTIP;
+  var SHOW_ACTIVE_TOOLTIP =   'fp-show-active';
 
-    // slide
-    var SLIDE_DEFAULT_SEL =     '.slide';
-    var SLIDE =                 'fp-slide';
-    var SLIDE_SEL =             '.' + SLIDE;
-    var SLIDE_ACTIVE_SEL =      SLIDE_SEL + ACTIVE_SEL;
-    var SLIDES_WRAPPER =        'fp-slides';
-    var SLIDES_WRAPPER_SEL =    '.' + SLIDES_WRAPPER;
-    var SLIDES_CONTAINER =      'fp-slidesContainer';
-    var SLIDES_CONTAINER_SEL =  '.' + SLIDES_CONTAINER;
-    var TABLE =                 'fp-table';
+  // slide
+  var SLIDE_DEFAULT_SEL =     '.slide';
+  var SLIDE =                 'fp-slide';
+  var SLIDE_SEL =             '.' + SLIDE;
+  var SLIDE_ACTIVE_SEL =      SLIDE_SEL + ACTIVE_SEL;
+  var SLIDES_WRAPPER =        'fp-slides';
+  var SLIDES_WRAPPER_SEL =    '.' + SLIDES_WRAPPER;
+  var SLIDES_CONTAINER =      'fp-slidesContainer';
+  var SLIDES_CONTAINER_SEL =  '.' + SLIDES_CONTAINER;
+  var TABLE =                 'fp-table';
 
-    // slide nav
-    var SLIDES_NAV =            'fp-slidesNav';
-    var SLIDES_NAV_SEL =        '.' + SLIDES_NAV;
-    var SLIDES_NAV_LINK_SEL =   SLIDES_NAV_SEL + ' a';
-    var SLIDES_ARROW =          'fp-controlArrow';
-    var SLIDES_ARROW_SEL =      '.' + SLIDES_ARROW;
-    var SLIDES_PREV =           'fp-prev';
-    var SLIDES_PREV_SEL =       '.' + SLIDES_PREV;
-    var SLIDES_ARROW_PREV =     SLIDES_ARROW + ' ' + SLIDES_PREV;
-    var SLIDES_ARROW_PREV_SEL = SLIDES_ARROW_SEL + SLIDES_PREV_SEL;
-    var SLIDES_NEXT =           'fp-next';
-    var SLIDES_NEXT_SEL =       '.' + SLIDES_NEXT;
-    var SLIDES_ARROW_NEXT =     SLIDES_ARROW + ' ' + SLIDES_NEXT;
-    var SLIDES_ARROW_NEXT_SEL = SLIDES_ARROW_SEL + SLIDES_NEXT_SEL;
+  // slide nav
+  var SLIDES_NAV =            'fp-slidesNav';
+  var SLIDES_NAV_SEL =        '.' + SLIDES_NAV;
+  var SLIDES_NAV_LINK_SEL =   SLIDES_NAV_SEL + ' a';
+  var SLIDES_ARROW =          'fp-controlArrow';
+  var SLIDES_ARROW_SEL =      '.' + SLIDES_ARROW;
+  var SLIDES_PREV =           'fp-prev';
+  var SLIDES_PREV_SEL =       '.' + SLIDES_PREV;
+  var SLIDES_ARROW_PREV =     SLIDES_ARROW + ' ' + SLIDES_PREV;
+  var SLIDES_ARROW_PREV_SEL = SLIDES_ARROW_SEL + SLIDES_PREV_SEL;
+  var SLIDES_NEXT =           'fp-next';
+  var SLIDES_NEXT_SEL =       '.' + SLIDES_NEXT;
+  var SLIDES_ARROW_NEXT =     SLIDES_ARROW + ' ' + SLIDES_NEXT;
+  var SLIDES_ARROW_NEXT_SEL = SLIDES_ARROW_SEL + SLIDES_NEXT_SEL;
 
     var $window = $(window);
     var $document = $(document);

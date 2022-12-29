@@ -1,18 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+.inner {
+  max-width: 800px;
+  margin: 0 auto;
+
+  position: relative;
+}
+
+/* HEADER */
 header {
   position: fixed;
   left: 0;
-  right: 0;
-  top: 0;
-  padding: 40px 0;
-  background: rgba(0, 0, 0, .6);
+  right: 50px;
+  padding: 30px 0;
+  width: 100%;
+  /* background: rgba(67, 62, 62, .1); */
   z-index: 100;
 }
-header nav ul {
+header .inner {
   display: flex;
-  justify-content: center;
-}
-header nav ul li {
-  margin: 0 20px;
-  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
+/* QUICK */
+.quick {
+  background-image: url(../images/img_banner_1_1.jpg);
+}
+.quick .quick-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.quick .rider-button {
+  width: 180px;
+  height: 220px;
+}
+.quick .quick-tit {
+  position: absolute;
+  top: 210px;
+  left: 250px;
+}
+.quick-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 66%; */
+
+  position: absolute;
+  top: 400px;
+  left: 250px;
+}
+.quick .qck-btn1 {
+  background-image: url(../images/img-appstore.png);
+  background-repeat: no-repeat;
+  background-size: 140px;
+  background-position: center center;
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  height: 70px;
+  margin-right: 12px;
+  padding: 15px 30px;
+  border-radius: 100px;
+}
+.quick .qck-btn2 {
+  background-image: url(../images/img-googleplay.png);
+  background-repeat: no-repeat;
+  background-size: 140px;
+  background-position: center center;
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  height: 70px;
+  margin-right: 12px;
+  padding: 15px 30px;
+  border-radius: 100px;
+}
+.quick .quick-box {
+  position: absolute;
+  right: 150px;
+  bottom : 100px;
+}
+.quick .quick-qr > span {
+  position: absolute;
+  right: 250px;
+  bottom : 400px;
+
+  display: block;
+  color: #333;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 15px
+}
+.quick .qr-img {
+  width: 300px;
+  height: 300px;
+}
+.quick .scroll-image {
+  position: absolute;
+  bottom: 50px;
+  right: 40%;
+
+  z-index: 10;
+}
